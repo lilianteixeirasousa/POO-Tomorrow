@@ -1,1 +1,154 @@
+//Questão 1
 
+package poo_tomorrow;
+
+public class ContaBancaria {
+
+	private String titular;
+	private double saldo;
+	private int numeroConta;
+
+	    // Construtor
+	public ContaBancaria(String titular, double saldo, int numeroConta) {
+		this.titular = titular;
+		this.saldo = saldo;
+		this.numeroConta = numeroConta;
+	    }
+
+	    // Método para realizar um saque
+	public void saque(double valor) {
+		if (valor > 0 && valor <= saldo) {
+			saldo -= valor;
+			System.out.println("Saque de R$" + valor + " realizado com sucesso.");
+	        } 
+		else {
+	            System.out.println("Saldo insuficiente para realizar o saque.");
+	        }
+	    }
+
+	    // Método para realizar um depósito
+	public void deposito(double valor) {
+		if (valor > 0) {
+			saldo += valor;
+			System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+	        } 
+		else {
+			System.out.println("Valor de depósito inválido.");
+	        }
+	    }
+
+	    // Método para exibir informações da conta
+	public void exibirInformacoes() {
+		System.out.println("Titular da conta: " + titular);
+		System.out.println("Número da conta: " + numeroConta);
+		System.out.println("Saldo: R$" + saldo);
+	    }
+
+	public static void main(String[] args) {
+	        // Criando objetos da classe ContaBancaria e atribuindo valores aos atributos
+		ContaBancaria conta1 = new ContaBancaria("Antonio Carlos da Silva", 1000.0, 12345);
+		ContaBancaria conta2 = new ContaBancaria("Maria da Conceição Pereira", 500.0, 54321);
+
+	        // Realizando operações na conta1
+		conta1.exibirInformacoes();
+		conta1.deposito(200.0);
+		conta1.saque(150.0);
+		conta1.exibirInformacoes();
+		System.out.println();
+
+	        // Realizando operações na conta2
+		conta2.exibirInformacoes();
+		conta2.saque(600.0);
+		conta2.deposito(300.0);
+		conta2.exibirInformacoes();
+	    }
+	}
+
+
+//Questão 2
+
+package poo_tomorrow;
+
+public class Triangulo {
+	private double base;
+	private double altura;
+
+	    // Construtor
+	public Triangulo(double base, double altura) {
+		this.base = base;
+		this.altura = altura;
+	    }
+
+	    // Método para calcular a área do triângulo
+	public double calcularArea() {
+		return (base * altura) / 2;
+	    }
+
+	    // Método para calcular o perímetro do triângulo, assumindo que é um triângulo equilátero
+	public double calcularPerimetro() {
+		double lado = Math.sqrt(base * base + altura * altura);
+
+	         // Calculando o perímetro multiplicando o comprimento do lado pelo número de lados (3)
+		double perimetro = 3 * lado;
+	         return perimetro;
+	     }
+	       
+	public static void main(String[] args) {
+	        // Criando um objeto da classe Triangulo e atribuindo valores aos atributos
+	        Triangulo triangulo = new Triangulo(5.0, 5.0);
+
+	        // Calculando e exibindo a área do triângulo
+	        double area = triangulo.calcularArea();
+	        System.out.println("Área do triângulo: " + area);
+
+	        // Calculando e exibindo o perímetro do triângulo
+	        double perimetro = triangulo.calcularPerimetro();
+	            System.out.println("Perímetro do triângulo: " + perimetro);
+	        }
+	  
+	}
+
+//Questão 3
+
+package poo_tomorrow;
+
+public class Produto {
+
+	    private String nome;
+	    private double preco;
+	    private int quantidadeEmEstoque;
+
+	    // Construtor
+	    public Produto(String nome, double preco, int quantidadeEmEstoque) {
+	        this.nome = nome;
+	        this.preco = preco;
+	        this.quantidadeEmEstoque = quantidadeEmEstoque;
+	    }
+
+	    // Método para aumentar a quantidade em estoque
+	    public void aumentarEstoque(int quantidade) {
+	        if (quantidade > 0) {
+	            quantidadeEmEstoque += quantidade;
+	            System.out.println("Estoque aumentado em " + quantidade + " unidades.");
+	        } else {
+	            System.out.println("Quantidade inválida para aumentar o estoque.");
+	        }
+	    }
+
+	    // Método para diminuir a quantidade em estoque
+	    public void diminuirEstoque(int quantidade) {
+	        if (quantidade > 0 && quantidade <= quantidadeEmEstoque) {
+	            quantidadeEmEstoque -= quantidade;
+	            System.out.println("Estoque diminuído em " + quantidade + " unidades.");
+	        } else {
+	            System.out.println("Quantidade inválida para diminuir o estoque.");
+	        }
+	    }
+
+	    // Método para exibir as informações do produto
+	    public void exibirInformacoes() {
+	        System.out.println("Nome do produto: " + nome);
+	        System.out.println("Preço: R$" + preco);
+	        System.out.println("Quantidade em estoque: " + quantidadeEmEstoque);
+	    }
+}
