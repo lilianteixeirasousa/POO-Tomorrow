@@ -1,7 +1,7 @@
 package poo_tomorrow;
 
 import java.util.Scanner;
-
+//Questão 1
 public class ParImpar {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -16,3 +16,205 @@ public class ParImpar {
         }
     }
 }
+
+
+
+//Questão 2
+package poo_tomorrow;
+
+import java.util.Scanner;
+
+public class TemConsecutivos {
+	public static boolean temConsecutivos(int n) {
+	        String numStr = String.valueOf(n);
+	        
+	        for (int i = 0; i < numStr.length() - 1; i++) {
+	            if (numStr.charAt(i) == numStr.charAt(i + 1)) {
+	                return true;
+	            }
+	        }
+	        
+	        return false;
+	    }
+	    
+	    public static void main(String[] args) {
+	    	   Scanner scanner = new Scanner(System.in);
+
+	           System.out.print("Digite um número inteiro: ");
+	           int n = scanner.nextInt();
+	           
+			if (temConsecutivos(n)) {
+	            System.out.println("O número " + n + " contém dois dígitos consecutivos iguais.");
+	        } else {
+	            System.out.println("O número " + n + " não contém dois dígitos consecutivos iguais.");
+	        }
+	    }
+}
+
+
+
+//Questão 3
+package poo_tomorrow;
+
+import java.util.Scanner;
+
+public class PrimeiroUltimo {
+
+	public static boolean primeiroIgualUltimo(int n) {
+	        String numStr = String.valueOf(n);
+	        
+	        if (numStr.length() < 2) {
+	            // Se o número tiver menos de dois dígitos, o primeiro e o último são iguais por padrão
+	            return true;
+	        }
+	        
+	        char primeiroDigito = numStr.charAt(0);
+	        char ultimoDigito = numStr.charAt(numStr.length() - 1);
+	        
+	        return primeiroDigito == ultimoDigito;
+	    }
+	    
+	    public static void main(String[] args) {
+	    	Scanner scanner = new Scanner(System.in);
+
+	           System.out.print("Digite um número inteiro: ");
+	           int n = scanner.nextInt();
+	        
+	        if (primeiroIgualUltimo(n)) {
+	            System.out.println("O primeiro e o último dígitos do número " + n + " são iguais.");
+	        } else {
+	            System.out.println("O primeiro e o último dígitos do número " + n + " são diferentes.");
+	        }
+	    }
+	}
+
+//Questão 4
+public class Multiplos {
+
+	public static void verificaMultiplos(int n, int i, int j) {
+	        int count = 0;
+	        int num = 0;
+	        
+	        while (count < n) {
+	            if (num % i == 0 || num % j == 0) {
+	                System.out.print(num + " ");
+	                count++;
+	            }
+	            num++;
+	        }
+	    }
+	    
+	    public static void main(String[] args) {
+	        int n = 6; // Quantidade de números a serem impressos
+	        int i = 2; // Primeiro número
+	        int j = 3; // Segundo número
+	        
+	        System.out.println("Os primeiros " + n + " números naturais que são múltiplos de " + i + " ou de " + j + " são:");
+	        verificaMultiplos(n, i, j);
+	    }
+	}
+
+
+
+
+//Questão 5
+package poo_tomorrow;
+
+import java.util.Scanner;
+
+public class VerificaTriangular {
+
+	public static boolean verificaTriangular(int n) {
+	        if (n < 0) {
+	            return false; // Apenas números naturais podem ser triangulares
+	        }
+
+	        int sum = 0;
+	        int k = 1;
+
+	        while (sum < n) {
+	            sum += k;
+	            k++;
+	        }
+
+	        return sum == n;
+	    }
+
+	    public static void main(String[] args) {
+	    	 Scanner scanner = new Scanner(System.in);
+
+	           System.out.print("Digite um número natural: ");
+	           int n = scanner.nextInt();
+	           
+	        if (verificaTriangular(n)) {
+	            System.out.println(n + " é um número triangular.");
+	        } else {
+	            System.out.println(n + " não é um número triangular.");
+	        }
+	    }
+	}
+
+
+//Questão 6
+public class Fatorial {
+    // Método para calcular o fatorial de um número
+    public static long calcularFatorial(int num) {
+        if (num == 0 || num == 1) {
+            return 1;
+        } else {
+            long fatorial = 1;
+            for (int i = 2; i <= num; i++) {
+                fatorial *= i;
+            }
+            return fatorial;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] sequencia = {5, 3, 7, 4};
+
+        System.out.println("Fatoriais da sequência:");
+
+        for (int i = 0; i < sequencia.length; i++) {
+            int num = sequencia[i];
+            long fatorial = calcularFatorial(num);
+            System.out.println(num + "! = " + fatorial);
+        }
+    }
+}
+
+
+//Questão 7
+
+package poo_tomorrow;
+
+import java.util.Scanner;
+
+public class Hipotenusa {
+
+	public static boolean isHipotenusa(int num) {
+		for (int a = 1; a < num; a++) {
+			for (int b = a; b < num; b++) {
+				int cSquare = a * a + b * b;
+				double c = Math.sqrt(cSquare);
+	                if (c == (int) c && c <= num) {
+	                    System.out.println((int) c);
+	                }
+	            }
+	        }
+	        return false;
+	    }
+
+	  public static void main(String[] args) {
+		  Scanner scanner = new Scanner(System.in);
+
+          System.out.print("Digite um número inteiro: ");
+          int n = scanner.nextInt();
+
+	      System.out.println("Comprimentos de hipotenusa de triângulos retângulos com catetos inteiros até " + n + ":");
+
+	      for (int i = 1; i <= n; i++) {
+	            isHipotenusa(i);
+	        }
+	    }
+	}
