@@ -1,1 +1,417 @@
+//Questão 1
 
+package poo_tomorrow_atividade4;
+
+public class ObjetoGeometrico {
+
+	protected double area;
+	protected double perimetro;
+
+	    // Construtor
+	public ObjetoGeometrico() {
+		this.area = 0;
+		this.perimetro = 0;
+	}
+
+	    // Método para calcular a área (a ser implementado nas classes filhas)
+	public void calcularArea() {
+	        // Implementação nas classes filhas
+	}
+
+	    // Método para calcular o perímetro (a ser implementado nas classes filhas)
+	public void calcularPerimetro() {
+	        // Implementação nas classes filhas
+	}
+
+	    // Método para exibir os dados do objeto geométrico
+	public void mostrarDados() {
+		System.out.println("Área: " + area);
+		System.out.println("Perímetro: " + perimetro);
+	}
+}
+
+
+public class Circulo extends ObjetoGeometrico {
+    private double centroX;
+    private double centroY;
+    private double raio;
+
+    // Construtor
+    public Circulo(double centroX, double centroY, double raio) {
+        this.centroX = centroX;
+        this.centroY = centroY;
+        this.raio = raio;
+    }
+
+    // Sobrescrevendo o método para calcular a área
+    @Override
+    public void calcularArea() {
+        super.area = Math.PI * raio * raio;
+    }
+
+    // Sobrescrevendo o método para calcular o perímetro
+    @Override
+    public void calcularPerimetro() {
+        super.perimetro = 2 * Math.PI * raio;
+    }
+}
+public class Retangulo extends ObjetoGeometrico {
+    private double ladoA;
+    private double ladoB;
+
+    // Construtor
+    public Retangulo(double ladoA, double ladoB) {
+        this.ladoA = ladoA;
+        this.ladoB = ladoB;
+    }
+
+    // Sobrescrevendo o método para calcular a área
+    @Override
+    public void calcularArea() {
+        super.area = ladoA * ladoB;
+    }
+
+    // Sobrescrevendo o método para calcular o perímetro
+    @Override
+    public void calcularPerimetro() {
+        super.perimetro = 2 * (ladoA + ladoB);
+    }
+}
+
+public class Triangulo extends ObjetoGeometrico {
+    private double ladoA;
+    private double ladoB;
+    private double ladoC;
+
+    // Construtor
+    public Triangulo(double ladoA, double ladoB, double ladoC) {
+        this.ladoA = ladoA;
+        this.ladoB = ladoB;
+        this.ladoC = ladoC;
+    }
+
+    // Sobrescrevendo o método para calcular a área
+    @Override
+    public void calcularArea() {
+        double s = (ladoA + ladoB + ladoC) / 2;
+        super.area = Math.sqrt(s * (s - ladoA) * (s - ladoB) * (s - ladoC));
+    }
+
+    // Sobrescrevendo o método para calcular o perímetro
+    @Override
+    public void calcularPerimetro() {
+        super.perimetro = ladoA + ladoB + ladoC;
+    }
+}
+
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Circulo circulo = new Circulo(0.5, 0.5, 5);
+        circulo.calcularArea();
+        circulo.calcularPerimetro();
+        circulo.mostrarDados();
+
+        Retangulo retangulo = new Retangulo(4, 6);
+        retangulo.calcularArea();
+        retangulo.calcularPerimetro();
+        retangulo.mostrarDados();
+
+        Triangulo triangulo = new Triangulo(3, 4, 5);
+        triangulo.calcularArea();
+        triangulo.calcularPerimetro();
+        triangulo.mostrarDados();
+    }
+}
+
+
+
+//Questão 2
+import java.util.ArrayList;
+import java.util.List;
+
+class Publicacao {
+    private String titulo;
+    private boolean disponivel;
+
+    public Publicacao(String titulo) {
+        this.titulo = titulo;
+        this.disponivel = true; // Publicação é inicialmente disponível
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+}
+
+
+class Livro extends Publicacao {
+    // Construtor
+    public Livro(String titulo) {
+        super(titulo);
+    }
+}
+
+
+class Periodico extends Publicacao {
+    private int numeroVolume;
+
+    public Periodico(String titulo, int numeroVolume) {
+        super(titulo);
+        this.numeroVolume = numeroVolume;
+    }
+
+    public int getNumeroVolume() {
+        return numeroVolume;
+    }
+}
+
+class Biblioteca {
+    private List<Publicacao> acervo;
+
+    public Biblioteca() {
+        this.acervo = new ArrayList<>();
+    }
+
+    // Método para adicionar uma publicação ao acervo da biblioteca
+    public void adicionarPublicacao(Publicacao publicacao) {
+        acervo.add(publicacao);
+    }
+
+    // Método para realizar o empréstimo de um livro
+    public void emprestarLivro(String tituloLivro) {
+        for (Publicacao publicacao : acervo) {
+            if (publicacao instanceof Livro && publicacao.getTitulo().equals(tituloLivro)) {
+                if (publicacao.isDisponivel()) {
+                    publicacao.setDisponivel(false); 
+                } else {
+                    System.out.println("Livro '" + tituloLivro + "' não está disponível para empréstimo.");
+                }
+                return;
+            }
+        }
+        System.out.println("Livro '" + tituloLivro + "' não encontrado na biblioteca.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Livro livro1 = new Livro("Abra a cabeça");
+        Livro livro2 = new Livro("Programação em Java");
+
+        Periodico periodico1 = new Periodico("Revista de SBC", 50);
+        Periodico periodico2 = new Periodico("Revista de Computação", 25);
+
+        Biblioteca biblioteca = new Biblioteca();
+        biblioteca.adicionarPublicacao(livro1);
+        biblioteca.adicionarPublicacao(livro2);
+        biblioteca.adicionarPublicacao(periodico1);
+        biblioteca.adicionarPublicacao(periodico2);
+
+        // Realizando empréstimos e devoluções de livros
+        biblioteca.emprestarLivro("Abra a cabeça");
+}
+}
+
+
+Questão 3
+
+//não consegui rodar este código, apresenta um erro na leitura de data
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class ContaBancaria {
+    private int id;
+    private int agencia;
+    private Cliente cliente;
+    protected double saldo;
+    protected List<Transacao> historicoTransacoes;
+
+    public ContaBancaria(int id, int agencia, Cliente cliente) {
+        this.id = id;
+        this.agencia = agencia;
+        this.cliente = cliente;
+        this.saldo = 0;
+        this.historicoTransacoes = new ArrayList<>();
+    }
+
+    // Método para realizar um saque
+    public abstract void sacar(double valor);
+
+    // Método para realizar um depósito
+    public void depositar(double valor) {
+        saldo += valor;
+        historicoTransacoes.add(new Transacao("Depósito", valor));
+    }
+
+    // Método para solicitar histórico de transações a partir de uma data (erro que não consegui corrigir)
+    public List<Transacao> historicoTransacoesAPartirDe(LocalDate data) {
+        List<Transacao> transacoesFiltradas = new ArrayList<>();
+        for (Transacao transacao : historicoTransacoes) {
+            if (transacao.getData().isAfter(data)) {
+                transacoesFiltradas.add(transacao);
+            }
+        }
+        return transacoesFiltradas;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getAgencia() {
+        return agencia;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+}
+
+
+public class ContaCorrente extends ContaBancaria {
+   
+    public ContaCorrente(int id, int agencia, Cliente cliente) {
+        super(id, agencia, cliente);
+    }
+
+    // Método para realizar um saque em conta corrente (sem taxas)
+    @Override
+    public void sacar(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+            historicoTransacoes.add(new Transacao("Saque", valor));
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+}
+
+
+public class ContaPoupanca extends ContaBancaria {
+    private double taxaSaque;
+    private double taxaRendimento;
+
+    public ContaPoupanca(int id, int agencia, Cliente cliente, double taxaSaque, double taxaRendimento) {
+        super(identificador, agencia, cliente);
+        this.taxaSaque = taxaSaque;
+        this.taxaRendimento = taxaRendimento;
+    }
+
+    // Método para realizar um saque em conta poupança (com taxa)
+    @Override
+    public void sacar(double valor) {
+        double valorComTaxa = valor + (valor * taxaSaque);
+        if (valorComTaxa <= saldo) {
+            saldo -= valorComTaxa;
+            historicoTransacoes.add(new Transacao("Saque", valorComTaxa));
+        } else {
+            System.out.println("Saldo insuficiente para realizar o saque.");
+        }
+    }
+
+    // Método para calcular e aplicar rendimentos mensais
+    public void calcularRendimentosMensais() {
+        double rendimento = saldo * taxaRendimento;
+        saldo += rendimento;
+        historicoTransacoes.add(new Transacao("Rendimento", rendimento));
+    }
+}
+
+
+public class Cliente {
+    private String cpf;
+    private String nome;
+    private LocalDate dataNascimento;
+
+    public Cliente(String cpf, String nome, LocalDate dataNascimento) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+}
+
+
+public class Transacao {
+    private String tipo;
+    private double valor;
+    private LocalDate data;
+
+    public Transacao(String tipo, double valor) {
+        this.tipo = tipo;
+        this.valor = valor;
+        this.data = LocalDate.now();
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Cliente cliente = new Cliente("12345678900", "João da Silva", LocalDate.of(1975, 10, 15));
+
+        ContaCorrente contaCorrente = new ContaCorrente(1, 123, cliente);
+        ContaPoupanca contaPoupanca = new ContaPoupanca(2, 123, cliente, 0.05, 0.04);
+
+        contaCorrente.depositar(1000);
+        contaPoupanca.depositar(2000);
+
+        contaCorrente.sacar(500);
+        contaPoupanca.sacar(500);
+
+        contaPoupanca.calcularRendimentosMensais();
+
+        // Mostra saldo das contas
+        System.out.println("Saldo da conta corrente: R$" + contaCorrente.getSaldo());
+        System.out.println("Saldo da conta poupança: R$" + contaPoupanca.getSaldo());
+
+        // Mostra histórico de transações da conta poupança a partir de uma data
+        System.out.println("\nHistórico de transações da conta poupança:");
+        List<Transacao> historicoContaPoupanca = contaPoupanca.historicoTransacoesAPartirDe(LocalDate.of(2022, 5, 1));
+        for (Transacao transacao : historicoContaPoupanca) {
+            System.out.println(transacao.getData() + " - " + transacao.getTipo() + ": R$" + transacao.getValor());
+        }
+    }
+}
+
+
+Questão 4
