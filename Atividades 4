@@ -414,4 +414,98 @@ public class Main {
 }
 
 
-Questão 4
+//Questão 4
+
+public class Midia {
+	protected int codigo;
+	protected double preco;
+	protected String nome;
+
+	public Midia(int codigo, double preco, String nome){
+		this.codigo = codigo;
+		this.preco = preco;
+		this.setNome(nome);
+	}
+
+	
+	//método para obter tipo de classe
+	public String getTipo() {
+        return this.getClass().getSimpleName();
+    }
+	
+	// Método para obter detalhes
+    public String getDetalhes() {
+        return "Código: " + codigo + "Preço: " + preco + "Nome: " + nome;
+    }
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+}
+
+
+public class Cd extends Midia{
+	private int musica;
+	
+	public Cd(int codigo, double preco, String nome, int musica) {
+		// TODO Auto-generated constructor stub
+		super(codigo, preco, nome);
+		this.setMusica(musica);
+	}
+
+	public int getMusica() {
+		return musica;
+	}
+
+	public void setMusica(int musica) {
+		this.musica = musica;
+	}
+	
+	public String getTipo() {
+        return this.getClass().getSimpleName();
+    }
+	
+	// Método para obter detalhes
+    public String getDetalhes() {
+        return "Código: " + codigo + "Preço: " + preco + "Nome: " + getNome() + "Música: " + musica;
+    }
+
+
+}
+
+public class Dvd extends Midia{
+	private int nFaixas;
+	
+	public Dvd(int codigo, double preco, String nome, int nFaixas) {
+		super(codigo, preco, nome);
+		this.setnFaixas(nFaixas);
+	}
+
+	public int getnFaixas() {
+		return nFaixas;
+	}
+
+	public void setnFaixas(int nFaixas) {
+		this.nFaixas = nFaixas;
+	}
+
+	public String getTipo() {
+        return this.getClass().getSimpleName();
+    }
+	
+	// Método para obter detalhes
+    public String getDetalhes() {
+        return "Código: " + codigo + "Preço: " + preco + "Nome: " + nome + "Faixas: " + nFaixas;
+    }
+
+}
+
+
+//Questão 5
