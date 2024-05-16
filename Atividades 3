@@ -1,1 +1,295 @@
+//Questão 1
 
+package Lista3;
+
+import java.time.LocalDate;
+
+//Classe aluno
+public class Aluno {
+	private String nome;
+	private String matricula;
+	private LocalDate dataNascimento;
+	
+	public Aluno(String nome, String matricula2, LocalDate dataNascimento) {
+		this.setNome(nome);
+		this.setMatricula(matricula2);
+		this.setDataNascimento(dataNascimento);
+	}
+
+	private void setDataNascimento(LocalDate dataNascimento2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public LocalDate getdataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setdNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+}
+
+
+//Classe Turma
+
+public class Turma {
+	private String codigo;
+	private String nomeDisciplina;
+	
+	public Turma(String codigo, String nomeDisciplina) {
+		this.setCodigo(codigo);
+		this.setNomeDisciplina(nomeDisciplina);
+	}
+
+	public String getNomeDisciplina() {
+		return nomeDisciplina;
+	}
+
+	public void setNomeDisciplina(String nomeDisciplina) {
+		this.nomeDisciplina = nomeDisciplina;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+}
+
+//Classe DiasAula
+import java.time.LocalDateTime;
+
+public class DiasAula {
+	private LocalDateTime dataHora;
+	private Turma turma;
+	private String conteudoMinistrado;
+
+	public DiasAula(LocalDateTime dataHora, Turma turma, String conteudoMinistrado) {
+		this.setDataHora(dataHora);
+		this.setTurma(turma);
+		this.setConteudoMinistrado(conteudoMinistrado);
+	}
+
+	
+
+	public LocalDateTime getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public String getConteudoMinistrado() {
+		return conteudoMinistrado;
+	}
+
+	public void setConteudoMinistrado(String conteudoMinistrado) {
+		this.conteudoMinistrado = conteudoMinistrado;
+	}
+
+}
+//Classe RegistroFrequencia
+import Lista3.Aluno;
+import Lista3.DiasAula;
+
+public class RegistroFrequencia {
+	private Aluno aluno;
+	private DiasAula diasAula;
+	private boolean presente;
+
+	public RegistroFrequencia(Aluno aluno, DiasAula diasAula, boolean presente) {
+		this.aluno = aluno;
+		this.diasAula = diasAula;
+		this.presente = presente;
+	}
+
+}
+
+import Lista3.Aluno;
+import Lista3.Turma;
+
+public class RegistroNota {
+	private Aluno aluno;
+	private Turma turma;
+	private double nota;
+
+	public RegistroNota(Aluno aluno, Turma turma, double nota) {
+		this.aluno = aluno;
+		this.turma = turma;
+		this.nota = nota;
+	}
+
+}
+
+
+//Classe Sistema
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import Lista3.Aluno;
+import Lista3.DiasAula;
+import Lista3.Turma;
+
+public class SistemaDiarioTurmas {
+
+	public SistemaDiarioTurmas() {
+		private static Scanner scanner = new Scanner(System.in);
+	    private static Map<Integer, Aluno> alunos = new HashMap<>();
+	    private static Map<String, Turma> turmas = new HashMap<>();
+	    private static ArrayList<DiasAula> diasAula = new ArrayList<>();
+	    private static ArrayList<RegistroFrequencia> registrosFrequencia = new ArrayList<>();
+	    private static ArrayList<RegistroNota> registrosNota = new ArrayList<>();
+
+	    public static void main(String[] args) {
+	        char opcao;
+	        do {
+	            System.out.println("Menu:");
+	            System.out.println("(a) Registrar um aluno");
+	            System.out.println("(b) Registrar uma turma");
+	            System.out.println("(c) Registrar um dia-aula");
+	            System.out.println("(d) Registrar uma nota");
+	            System.out.println("(e) Registrar uma frequência");
+	            System.out.println("(f) Dado um dia aula e uma turma, identificar os alunos presentes");
+	            System.out.println("(g) Dado um aluno e uma turma, mostrar a quantidade de presenças e de faltas");
+	            System.out.println("(h) Dado um aluno e uma turma, mostrar sua nota");
+	            System.out.println("(i) Listar os alunos inscritos em uma turma");
+	            System.out.println("(j) Listar as turmas");
+	            System.out.println("(s) Sair");
+	            System.out.print("Escolha uma opção: ");
+	            opcao = scanner.next().charAt(0);
+	            scanner.nextLine(); // Limpar o buffer do scanner
+
+	            switch (opcao) {
+	                case 'a':
+	                    registrarAluno();
+	                    break;
+	                case 'b':
+	                    registrarTurma();
+	                    break;
+	                case 'c':
+	                    registrarDiaAula();
+	                    break;
+	                case 'd':
+	                    registrarNota();
+	                    break;
+	                case 'e':
+	                    registrarFrequencia();
+	                    break;
+	                case 'f':
+	                    // Implementação do item (f)
+	                    break;
+	                case 'g':
+	                    // Implementação do item (g)
+	                    break;
+	                case 'h':
+	                    // Implementação do item (h)
+	                    break;
+	                case 'i':
+	                    // Implementação do item (i)
+	                    break;
+	                case 'j':
+	                    // Implementação do item (j)
+	                    break;
+	                case 's':
+	                    System.out.println("Saindo...");
+	                    break;
+	                default:
+	                    System.out.println("Opção inválida!");
+	            }
+	        } while (opcao != 's');
+	        scanner.close();
+	    }
+
+	    private static void registrarAluno() {
+	        System.out.print("Nome do aluno: ");
+	        String nome = scanner.nextLine();
+	        System.out.print("Matrícula do aluno: ");
+	        String matricula = scanner.nextLine();
+	        scanner.nextLine(); // Limpar o buffer do scanner
+	        System.out.print("Data de nascimento do aluno (AAAA-MM-DD): ");
+	        String dataNascimentoStr = scanner.nextLine();
+	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr);
+
+	        Aluno aluno = new Aluno(nome, matricula, dataNascimento);
+	        alunos.put(matricula, aluno);
+	        System.out.println("Aluno registrado com sucesso!");
+	    }
+
+	    private static void registrarTurma() {
+	        System.out.print("Código da turma: ");
+	        String codigo = scanner.nextLine();
+	        System.out.print("Nome da disciplina: ");
+	        String disciplina = scanner.nextLine();
+
+	        Turma turma = new Turma(codigo, disciplina);
+	        turmas.put(codigo, turma);
+	        System.out.println("Turma registrada com sucesso!");
+	    }
+
+	    private static void registrarDiaAula() {
+	        System.out.print("Data e hora da aula (AAAA-MM-DD HH:MM): ");
+	        String dataHoraStr = scanner.nextLine();
+	        LocalDateTime dataHora = LocalDateTime.parse(dataHoraStr);
+	        System.out.print("Código da turma: ");
+	        String codigoTurma = scanner.nextLine();
+	        System.out.print("Conteúdo ministrado: ");
+	        String conteudoMinistrado = scanner.nextLine();
+
+	        Turma turma = turmas.get(codigoTurma);
+	        if (turma != null) {
+	            DiasAula diaAula = new DiasAula(dataHora, turma, conteudoMinistrado);
+	            diasAula.add(diaAula);
+	            System.out.println("Dia-aula registrado com sucesso!");
+	        } else {
+	            System.out.println("Turma não encontrada!");
+	        }
+	    }
+
+	    private static void registrarNota() {
+	        // Implementar o método
+	    }
+
+	    private static void registrarFrequencia() {
+	        // Implementar o método
+	    }
+
+
+}
+
+
+
+//Questão 2
