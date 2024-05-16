@@ -227,10 +227,11 @@ public class Main {
 
 Questão 3
 
-//não consegui rodar este código, apresenta um erro na leitura de data
+//não consegui rodar este código, apresenta um erro 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.localdate
 
 public abstract class ContaBancaria {
     private int id;
@@ -509,3 +510,95 @@ public class Dvd extends Midia{
 
 
 //Questão 5
+package questao5;
+
+abstract class Funcionario {
+	protected String nome;
+
+	public Funcionario(String nome) {
+		this.nome = nome;
+		// TODO Auto-generated constructor stub
+	}
+
+	 public abstract double getPay();
+}
+
+
+public class Assalariado extends Funcionario{
+	private double salario;
+
+	public Assalariado(String nome, double salario) {
+		// TODO Auto-generated constructor stub
+		super(nome);
+		this.salario = salario;
+	}
+	
+	public double getPay() {
+		return salario;
+	}
+
+}
+
+public class Horista extends Funcionario{
+	private double valorHoras;
+	private double horasTrabalhadas;
+
+	public Horista(String nome, double valorHoras, double horasTrabalhadas) {
+		// TODO Auto-generated constructor stub
+		super(nome);
+		this.valorHoras = valorHoras;
+		this.horasTrabalhadas = horasTrabalhadas;
+	}
+	
+	public double getPay() {
+		double horasTrabalhadas = 0;
+		return valorHoras * horasTrabalhadas;
+	}
+}
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class FolhaPagamento {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<Funcionario> funcionarios = new ArrayList<>();
+		
+		System.out.println("Deseja inserir um funcionário assalariado (A) ou horista (H)?");
+		String tipoFuncionario = scanner.nextLine();
+		
+		if (tipoFuncionario.equalsIgnoreCase("A")) {
+			System.out.println("Digite o nome funcionário assalariado: ");
+			String nome = scanner.nextLine();
+			System.out.println("Digite o salário mensal: ");
+			double salarioMensal = scanner.nextDouble();
+			funcionarios.add(new Assalariado(nome, salarioMensal));
+		} else if (tipoFuncionario.equalsIgnoreCase("H")) {
+			System.out.println("Digite o nome do funcionário horista: ");
+			String nome = scanner.nextLine();
+			System.out.println("Digite o valor da hora trabalhada: ");
+			double valorHora = scanner.nextDouble();
+			System.out.println("Digite as horas trabalhadas: ");
+			int horasTrabalhadas = scanner.nextInt();
+			funcionarios.add(new Horista(nome, valorHora, horasTrabalhadas));
+		}else {
+			System.out.println("Opção inválida.");
+		}
+		
+		double gastoTotal = 0;
+		for (Funcionario funcionario : funcionarios) {
+			gastoTotal += funcionario.getPay();
+		}
+		System.out.println("Gasto total da empresa com a folha de pagamento: " + gastoTotal);
+		
+		scanner.close();
+	}
+
+	
+}
+
+
+
