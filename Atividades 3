@@ -294,6 +294,143 @@ public class SistemaDiarioTurmas {
 
 //Questão 2
 
+import java.util.ArrayList;
+
+// Classe Gabarito
+class Gabarito {
+    private ArrayList<Character> respostas;
+
+    public Gabarito(ArrayList<Character> respostas) {
+        this.respostas = respostas;
+    }
+
+    public char respostaQuestao(int numeroQuestao) {
+        if (numeroQuestao >= 1 && numeroQuestao <= respostas.size()) {
+            return respostas.get(numeroQuestao - 1);
+        } else {
+            return '-';
+        }
+    }
+}
+
+// Classe Prova
+class Prova {
+    private Gabarito gabarito;
+    private ArrayList<Character> respostasAluno;
+    private static final int QUESTOES_1_A_10 = 10;
+    private static final double PESO_QUESTOES_1_A_10 = 0.5;
+    private static final int QUESTOES_11_A_15 = 5;
+    private static final double PESO_QUESTOES_11_A_15 = 1.0;
+
+    public Prova(Gabarito gabarito) {
+        this.gabarito = gabarito;
+        this.respostasAluno = new ArrayList<>();
+    }
+
+    public void respostaAluno(char resposta) {
+        respostasAluno.add(resposta);
+    }
+
+    public int acertos() {
+        int totalAcertos = 0;
+        for (int i = 0; i < respostasAluno.size(); i++) {
+            if (respostasAluno.get(i) == gabarito.respostaQuestao(i + 1)) {
+                totalAcertos++;
+            }
+        }
+        return totalAcertos;
+    }
+
+    public double nota() {
+        int acertosQuestoes1a10 = acertosQuestoes1a10();
+        int acertosQuestoes11a15 = acertosQuestoes11a15();
+        double nota = acertosQuestoes1a10 * PESO_QUESTOES_1_A_10 +
+                acertosQuestoes11a15 * PESO_QUESTOES_11_A_15;
+        return nota;
+    }
+
+    public double maior(Prova outraProva) {
+        int acertosOutraProva = outraProva.acertos();
+        int acertosAtual = acertos();
+        double notaOutraProva = outraProva.nota();
+        double notaAtual = nota();
+        if (acertosOutraProva > acertosAtual || (acertosOutraProva == acertosAtual && notaOutraProva > notaAtual)) {
+            return notaOutraProva;
+        } else {
+            return notaAtual;
+        }
+    }
+
+    private int acertosQuestoes1a10() {
+        int totalAcertos = 0;
+        for (int i = 0; i < QUESTOES_1_A_10; i++) {
+            if (respostasAluno.get(i) == gabarito.respostaQuestao(i + 1)) {
+                totalAcertos++;
+            }
+        }
+        return totalAcertos;
+    }
+
+    private int acertosQuestoes11a15() {
+        int totalAcertos = 0;
+        for (int i = QUESTOES_1_A_10; i < respostasAluno.size(); i++) {
+            if (respostasAluno.get(i) == gabarito.respostaQuestao(i + 1)) {
+                totalAcertos++;
+            }
+        }
+        return totalAcertos;
+    }
+}
+
+// Classe principal para testar o sistema
+public class Main {
+    public static void main(String[] args) {
+        // Criando o gabarito
+        ArrayList<Character> respostasGabarito = new ArrayList<>();
+        respostasGabarito.add('A');
+        respostasGabarito.add('B');
+        respostasGabarito.add('C');
+        respostasGabarito.add('D');
+        respostasGabarito.add('E');
+        respostasGabarito.add('A');
+        respostasGabarito.add('B');
+        respostasGabarito.add('C');
+        respostasGabarito.add('D');
+        respostasGabarito.add('E');
+        respostasGabarito.add('A');
+        respostasGabarito.add('B');
+        respostasGabarito.add('C');
+        respostasGabarito.add('D');
+        respostasGabarito.add('E');
+        Gabarito gabarito = new Gabarito(respostasGabarito);
+
+        // Criando a prova do aluno
+        Prova provaAluno = new Prova(gabarito);
+        provaAluno.respostaAluno('A');
+        provaAluno.respostaAluno('B');
+        provaAluno.respostaAluno('C');
+        provaAluno.respostaAluno('D');
+        provaAluno.respostaAluno('E');
+        provaAluno.respostaAluno('A');
+        provaAluno.respostaAluno('B');
+        provaAluno.respostaAluno('C');
+        provaAluno.respostaAluno('D');
+        provaAluno.respostaAluno('E');
+        provaAluno.respostaAluno('A');
+        provaAluno.respostaAluno('B');
+        provaAluno.respostaAluno('C');
+        provaAluno.respostaAluno('D');
+        provaAluno.respostaAluno('E');
+
+        // Exibindo os resultados
+        System.out.println("Número de acertos: " + provaAluno.acertos());
+        System.out.println("Nota do aluno: " + provaAluno.nota());
+    }
+}
+
+
+
+
 //Questão 3
 
 public class Vetor {
@@ -425,3 +562,9 @@ public class ClasseTeste {
 }
 
 //Questão 5
+
+//Questão 6
+
+//Questão 7
+
+//Questão 8
